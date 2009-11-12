@@ -21,7 +21,7 @@ include_recipe "rsyslog"
 
 rsyslog_server = node[:rsyslog][:server] ? node[:rsyslog][:server] : search(:node, "rsyslog_server:true").map { |n| n["fqdn"] }.first
 
-unless node[:rsyslog][:server] 
+if node[:rsyslog][:server] 
   template "/etc/rsyslog.d/remote.conf" do
     source "remote.conf.erb"
     backup false
